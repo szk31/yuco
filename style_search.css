@@ -1,0 +1,263 @@
+#search_section {
+	margin-top : 10vw;
+}
+
+#input_container {
+	display : flex;
+}
+
+#input {
+	width : 86vw;
+	padding : 1vw;
+	margin : 1.5vw 2vw;
+	height : 10vw;
+	font-size : 5vw;
+	border-radius : 1.2vw;
+}
+
+#switch_container {
+	justify-content: center;
+}
+
+#search_options_button {
+	content : url("icon/arrow.png");
+	width : 8vw;
+	height : 8vw;
+	margin-top : 2vw;
+	transform : rotate(180deg);
+}
+
+#search_options_button.opened {
+	transform : none;
+}
+
+#search_options_container {
+	margin : 0.5vw 2.4vw;
+	padding : 2vw;
+	background-color : PaleGreen;
+	border-radius : 2vw;
+}
+
+.search_options_title {
+	font-size : 5vw;
+	font-weight : bold;
+}
+
+.search_options_underline {
+	border-bottom : 0.5vw solid Black;
+	margin-bottom : 1.6vw;
+	width : 95%;
+	margin-right : 5%;
+}
+
+.search_options_subblock {
+	display : grid;
+	margin-bottom : 2vw;
+	font-size : 3.2vw;
+}
+
+.search_grid_2 {
+	grid-template-columns: 45% 45%;
+}
+
+.search_grid_3 {
+	grid-template-columns: 20% 25% 55%;
+}
+
+.search_options_subblock.search_grid_2>label:not(#search_options_count) {
+	display : grid;
+	grid-template-columns: 6vw auto;
+}
+
+.search_options_subblock.search_grid_3>label {
+	display : grid;
+	grid-template-columns: 6vw auto;
+}
+
+.search_options_radio {
+	flex-grow : 1;
+}
+
+.search_options_subblock .attr_name {
+	font-weight : bold;
+}
+
+#search_options_count_input {
+	height : 5vw;
+	width : 12vw;
+	font-size : 4.2vw;
+	border-radius: 1.8vw;
+	border : 0.6vw solid DarkBlue;
+	text-align : center;
+	padding : 0.2vw 0 0 0;
+}
+
+/* song title section */
+.song_name_container {
+	padding : 0vw 1vw;
+	margin : 1.5vw 1.5vw;
+	text-align : center;
+	display : flex;
+	border : .2vw solid #b2a58f;
+	border-radius : 1.6vw;
+	position : sticky;
+	position : -webkit-sticky;
+	top : 10vw;
+}
+
+.song_name_container.odd_colour {
+	background-color : LightYellow;
+}
+
+.song_name_container.even_colour {
+	background-color : PeachPuff;
+}
+
+.song_rap{
+	flex-grow: 1;
+}
+
+.song_name {
+	font-weight : bold;
+	font-size : 5.8vw;
+}
+
+.song_credit:not(.long_credit) {
+	font-size : 3.2vw;
+}
+
+.song_credit.long_credit {
+	font-size : 2.4vw;
+}
+
+.song_icon_container {
+	flex-direction : column;
+}
+
+.song_fold_icon {
+	content : url("icon/list.png");
+	width : 6vw;
+	height : 6vw;
+	align-items : center;
+	margin: 5px 5px 5px 0;
+}
+
+.song_fold_icon:not(.closed) {
+	flex-grow : 1;
+}
+
+.song_fold_icon.closed {
+	transform : rotate(180deg);
+}
+
+.song_copy_icon {
+	content : url("icon/copy.png");
+	width : 6vw;
+	height : 6vw;
+	z-index : 2;
+}
+
+/* song entry section */
+.entry_container {
+	font-weight : bold;
+	font-size : 3.6vw;
+	padding : 1vw;
+	margin : 1.5vw 3.2vw;
+	border : .2vw solid color-mix(in srgb, currentColor 72%, Black);
+	border-radius : 1.2vw;
+}
+
+.entry_primary {
+	display : flex;
+}
+
+.entry_date {
+	flex-grow : 1;
+	width : 34vw;
+	margin : 0vw 2vw;
+}
+
+.entry_singer {
+	flex-grow : 1;
+	width : 34vw;
+}
+
+.mem_display {
+	flex-grow : 1;
+	width : 14vw;
+}
+
+.entry_share {
+	content : url("icon/share.png");
+	width : 6vw;
+	height : 6vw;
+}
+
+.entry_note {
+	font-size : 2.7vw;
+	margin : 0vw 2.5vw;
+}
+
+
+/* singer colour palette section */
+/* yuco (9) cc : 4.55 */
+.singer_9 {
+	background-color : #ffcffb;
+	color : #265ebd;
+}
+.singer_9m {
+	background-color : #265ebd;
+	color : #ffcffb;
+}
+
+/* search autocomplete section */
+#search_auto {
+	position : absolute;
+	left : 3vw;
+	top : 22vw;
+	border : 1vw solid GhostWhite;
+	background-color : LightGreen;
+}
+
+.auto_panel {
+	height : 12vw;
+	width : 80vw;
+	overflow : hidden;
+	white-space : nowrap;
+}
+
+.auto_panel:not(.auto_first) {
+	border-top : 0.5vw solid GhostWhite;
+}
+
+/* like i know theres aint no hover on a damn mobile site */
+.auto_panel:hover {
+	background-color : MediumSeaGreen;
+}
+
+.auto_reading {
+	position: relative;
+	transform: translateY(40%);
+	padding : 0.5vw;
+	font-size : 3.2vw;
+	height : 4vw;
+}
+
+.auto_display {
+	padding : 0.25vw;
+	font-size : 4.8vw;
+	height : 6vw;
+}
+
+/* no result */
+.search_no_result {
+	margin : 2vw 20vw;
+	padding : 2vw 3.2vw;
+	width : 53.6vw;
+	background-color : rgba(0.8, 0.6, 0.8, 0.75);
+	border-radius : 2vw;
+	font-size : 6vw;
+	font-weight : bold;
+	color : GhostWhite;
+	text-align : center;
+}

@@ -1,0 +1,363 @@
+#repertoire_section {
+	margin-top : 10vw;
+}
+
+#rep_input {
+    width: 96vw;
+    padding: 1vw 1vw;
+    margin: 1.5vw 2vw 0 2vw;
+    height: 10vw;
+    font-size: 5vw;
+	border-radius : 1.2vw;
+}
+
+#filter_container>div {
+	height : auto;
+	width : 92vw;
+	margin : 2.4vw 2vw;
+	padding : 2vw;
+	border-radius : 1.2vw;
+	background-color : PaleGreen;
+	font-size : 3.2vw;
+	color : Black;
+	font-weight : bold;
+}
+
+.filter_title {
+	display : flex;
+}
+
+.filter_title_name {
+	flex-grow : 1;
+	font-size : 4.4vw;
+}
+
+.filter_close {
+	content : url("icon/list.png");
+	width : 6vw;
+	height : 6vw;
+	align-items : center;
+	margin: 5px 5px 5px 0;
+}
+
+.filter_close.closed {
+	transform : rotate(180deg);
+}
+
+.filter_subblock_title {
+	border-bottom : 0.5vw solid Black;
+	width : 80vw;
+	margin : 2vw 0vw;
+	padding-left : 3.6vw;
+	font-size : 3.6vw;
+}
+
+.filter_subblock_content {
+	background-color : #DFDFDF;
+	border-radius : 1.4vw;
+	padding : 1.5vw;
+	margin-bottom : 1vw;
+}
+
+.filter_entry_attr_item, 
+.filter_genre_anisong_item,
+.filter_genre_general_item,
+.filter_sort_item,
+.filter_sort2_item,
+.filter_sort3_item,
+.filter_display_item,
+.rep_item {
+	display : flex;
+	margin : 0.2vw 3vw 0.2vw 1.2vw;
+}
+
+.rep_song_container {
+	font-weight : bold;
+	font-size : 3.2vw;
+	margin : 1.5vw 3.2vw;
+	padding : .8vw 1.2vw .2vw 1.2vw;
+	border-radius : 0.8vw;
+	border : 0.8vw solid rgba(0, 0, 0, 0);
+	outline : .2vw solid #b2a58f;
+}
+
+.rep_song_container.selected {
+	border : 0.8vw solid DarkMagenta;
+}
+
+.rep_song_container.rep_mem_only {
+	background-color : PeachPuff;
+}
+
+.rep_song_container:not(.rep_mem_only) {
+	background-color : LightYellow;
+}
+
+.rep_song_title {
+	height : 1.25em;
+	line-height : 1.25em;
+	overflow : hidden;
+	overflow-inline : hidden;
+}
+
+.rep_song_info {
+	margin-top : 0.4vw;
+}
+
+.rep_extra_info {
+	margin-left : 1vw;
+}
+
+#rep_list {
+	position : absolute;
+	left : 50%;
+	top : 50%;
+	transform: translate(-50%, -50%);
+	width : 92vw;
+	height : auto;
+	background-color : DarkSlateBlue;
+	font-size : 4vw;
+	border: 0.5vw solid SlateBlue;
+	border-radius: 2vw;
+	overflow-y : auto;
+	text-align : center;
+	color : AliceBlue;
+}
+
+.rep_list_title_container {
+	display : grid;
+	grid-template-columns: 30% 40% 30%;
+}
+
+.rep_list_delete_container {
+	position : relative;
+}
+
+.rep_list_delete {
+	position : absolute;
+	content : url("icon/trash.png");
+	width : 4.8vw;
+	height : 4.8vw;
+	left : 0;
+	bottom : 0;
+	margin-left : 2.4vw;
+}
+
+.rep_list_wc_container {
+	position : relative;
+}
+
+.rep_list_wordcount {
+	position : absolute;
+	bottom : 0;
+	right : 4vw;
+	font-size : 4vw;
+	font-weight : bold;
+}
+
+#rep_list_container.editing {
+	display : grid;
+	grid-template-columns: 8vw auto;
+}
+
+#rep_list_leftbar {
+	padding : 2vw;
+	height : 50vh;
+	overflow : hidden;
+}
+
+.rep_list_item {
+	padding : 1.2vw 0.4vw;
+	width : 4.8vw;
+	height : 4.8vw;
+}
+
+.rep_list_item {
+	content : url("icon/target.png");
+}
+
+.rep_list_item.arrow_up {
+	content : url("icon/arrow.png");
+}
+
+.rep_list_item.arrow_down {
+	content : url("icon/arrow.png");
+	transform : rotate(180deg);
+}
+
+#rep_list_content {
+	overflow-y : auto;
+	background-color : SlateBlue;
+	border-radius : 2vw;
+	border : none;
+	margin : 0vw 2vw;
+	padding : 2vw;
+	height : 50vh;
+	white-space : nowrap;
+}
+
+#rep_list_content>div {
+	height : 1em;
+	line-height : 1em;
+	overflow : hidden;
+	color : AliceBlue;
+	text-align : left;
+	padding : 1.6vw 0.4vw;
+}
+
+.rep_list_control {
+	margin : 0 5%;
+	grid-template-columns: 50% 50% !important;
+}
+
+.rep_list_control>div {
+	margin : 2vw 0vw;
+}
+
+#list_artist_cb {
+	margin : auto 1.2vw;
+}
+
+.rep_list_control .twitter {
+	display : flex;
+	justify-content : center;
+	align-items : center;
+	transform: translate(62.5%, 0);
+}
+
+.rep_list_control>.disabled {
+	opacity: 0.4;
+}
+
+#rep_share_rap {
+	display : grid;
+	grid-template-columns: 80% 20%;
+}
+
+#rep_copy {
+	right : 0;
+	margin : 0.6vw;
+	width : 6vw;
+	height : 6vw;
+	content : url("icon/copy.png");
+	background-color : MediumSlateBlue;
+	border-radius : 0.8vw;
+}
+
+/* general stuff */
+.grid_block-2,
+.grid_block-3,
+.grid_block-4,
+.grid_block-3_type2 {
+	display : grid;
+}
+
+.grid_block-2 {
+	grid-template-columns: 45% 45%;
+}
+
+.grid_block-3 {
+	grid-template-columns: 32% 32% 30%;
+}
+
+.grid_block-4 {
+	grid-template-columns: 30% 18% 28% 24%;
+}
+
+.grid_block-3_type2 {
+	grid-template-columns: 40% 40% 20%;
+}
+
+.rowspan-2 {
+	grid-column : 1 / 2 span;
+}
+
+.rowspan-3 {
+	grid-column : 1 / 3 span;
+}
+
+.colspan-2 {
+	grid-row : 1 / span 2;
+}
+
+.col-1 {
+	grid-column : 1;
+}
+
+.col-2 {
+	grid-column : 2;
+}
+
+.col-3 {
+	grid-column : 3;
+}
+
+.col-4 {
+	grid-column : 4;
+}
+
+.col-5 {
+	grid-column : 5;
+}
+
+.row-1 {
+	grid-row : 1;
+}
+
+.row-2 {
+	grid-row : 2;
+}
+
+.row-3 {
+	grid-row : 3;
+}
+
+.row-4 {
+	grid-row : 4;
+}
+
+.row-5 {
+	grid-row : 5;
+}
+
+.checkbox,
+.switch {
+	width : 5vw;
+	height : 5vw;
+	margin : 0vw 0.6vw 1.2vw;
+}
+
+.checkbox.selected {
+	content : url("icon/cbx_check.png");
+}
+
+.checkbox:not(.selected) {
+	content : url("icon/cbx_minus.png");
+}
+
+.search_grid_2 .checkbox:not(.selected),
+.sort3_checkbox:not(.selected),
+#list_artist_cb:not(.selected) {
+	content : url("icon/cbx_cross.png");
+}
+
+.switch {
+	content : url("icon/cbx_switch.png");
+}
+
+.radio {
+	width : 3vw;
+	height : 3vw;
+	margin : 0.2vw 0.6vw 0.6vw;
+	border-radius : 3vw;
+	border : 0.8vw solid White;
+	outline : 0.3vw solid Teal;
+}
+
+.radio.selected {
+	background-color : DarkBlue;
+}
+
+.radio:not(.selected) {
+	background-color : White;
+}
