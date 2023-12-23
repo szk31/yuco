@@ -290,6 +290,11 @@ $(function() {
 			prevent_menu_popup = false;
 		}
 	});
+	
+	// home - hyper
+	$(document).on("click", ".home_hyperlink_block", function() {
+		jump2page($(this).attr("id").replace("home_hyper_", ""));
+	})
 });
 
 function init() {

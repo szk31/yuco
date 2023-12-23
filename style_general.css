@@ -303,10 +303,6 @@ body.post_switch {
 	margin-top : 2vh;
 }
 
-#info_github {
-	margin-top : 2.5vh;
-}
-
 /* mem count section */
 #memcount h3,
 #memcount_rep h3{
@@ -336,40 +332,6 @@ body.post_switch {
 #memcount:not(.anti_extra),
 #memcount_rep:not(.anti_extra) {
 	height : calc(12vh + 100vw);
-}
-
-#memcount_table {
-	margin-left: auto;
-	margin-right: auto;
-	background-color : AliceBlue;
-	padding : 1.2vw;
-	border-radius : 2vw;
-	font-weight : bold;
-	font-size : 4vw;
-}
-
-#memcount_table th {
-	min-width : 13.6vw;
-}
-
-.memcount_row>td {
-	border-radius : 0.6vw;
-}
-
-.memcount_row>td:not(.memcount_name) {
-	text-align : center;
-	padding : 0.4vw 1.2vw;
-}
-
-.memcount_row>.memcount_empty {
-	background-color : #7f7f7f !important;
-	color : rgba(0, 0, 0, 0) !important;
-	background-image: linear-gradient(to bottom right, transparent calc(50% - 1px), AliceBlue, transparent calc(50% + 1px)); 
-}
-
-.memcount_name {
-	padding : 0.4vw 1.2vw 0.4vw 4vw;
-	text-align : right;
 }
 
 .memcount_sum {

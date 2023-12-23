@@ -9,7 +9,7 @@
 }
 
 .home_member_block, .home_general_block {
-	margin : 2vw 4vw;
+	margin : 24vw 4vw 4vw 4vw;
 	padding : 2vw;
 	border-radius : 2vw;
 	border : .4vw solid color-mix(in srgb, currentColor 72%, White);
@@ -60,4 +60,16 @@
 
 .home_general_content {
 	text-align : center;
+}
+
+.home_hyperlink_block {
+	margin : 8vw 32vw;
+	padding : 2vw;
+	border-radius : 2vw;
+	border : .8vw solid SlateBlue;
+	text-align : center;
+	font-weight : bold;
+	font-size : 4vw;
+	background-color : DarkSlateBlue;
+	color : AliceBlue;
 }
