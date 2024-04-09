@@ -1,5 +1,6 @@
 #home_section {
 	margin-top : 10vw;
+	padding-bottom: 1vw;
 }
 
 .home_title {
@@ -9,10 +10,10 @@
 }
 
 .home_member_block, .home_general_block {
-	margin : 24vw 4vw 4vw 4vw;
+	margin : 24vw 4vw 4vw;
 	padding : 2vw;
-	border-radius : 2vw;
-	border : .4vw solid color-mix(in srgb, currentColor 72%, White);
+	border-radius : 3.2vw;
+	border : .4vw solid color-mix(in srgb, currentColor 72%, var(--base-back));
 	
 	display : grid;
 	grid-template-columns: 30% 70%;
@@ -36,6 +37,7 @@
 	margin : 2vw auto 4vw 8vw;
 	font-size : 6vw;
 	font-weight : bold;
+	display: flex;
 }
 
 .home_general_title {
@@ -49,17 +51,6 @@
 }
 .home_member_social>a {
 	margin : auto 1vw;
-}
-
-.home_general_block {
-	margin-top : 6vw;
-	padding-top : 2.4vw;
-	background-color : HoneyDew;
-	color : MidnightBlue;
-}
-
-.home_general_content {
-	text-align : center;
 }
 
 .home_hyperlink_block {
