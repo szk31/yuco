@@ -253,61 +253,6 @@ input[type=text]::placeholder {
 
 
 /* singer colour palette section */
-/* nia (1) cc : 11.86 */
-.singer_1m,
-*:is([theme=dark], [theme=extra]) .singer_1m.memcount_rep_name {
-	background-color : var(--s-nia-text);
-	color : var(--s-nia-back);
-}
-.singer_1,
-*:is([theme=dark], [theme=extra]) .singer_1m {
-	background-color : var(--s-nia-back);
-	color : var(--s-nia-text);
-}
-/* momo (2) cc : 5.14 */
-.singer_2m,
-*:is([theme=dark], [theme=extra]) .singer_2m.memcount_rep_name {
-	background-color : var(--s-momo-text);
-	color : var(--s-momo-back);
-}
-.singer_2,
-*:is([theme=dark], [theme=extra]) .singer_2m {
-	background-color : var(--s-momo-back);
-	color : var(--s-momo-text);
-}
-/* momonia (3) cc : 5.56 */
-.singer_3 {
-	background-color : var(--s-mmna-back);
-	color : var(--s-mmna-text);
-}
-/* kirara (4) cc : 5.14 */
-.singer_4m,
-*:is([theme=dark], [theme=extra]) .singer_4m.memcount_rep_name {
-	background-color : var(--s-krr-text);
-	color : var(--s-krr-back);
-}
-.singer_4,
-*:is([theme=dark], [theme=extra]) .singer_4m {
-	background-color : var(--s-krr-back);
-	color : var(--s-krr-text);
-}
-/* kirania (5) cc : 5.39 */
-.singer_5 {
-	background-color : var(--s-krna-back);
-	color : var(--s-krna-text);
-}
-/* momokira (6) cc : 5.57 */
-.singer_6 {
-	background-color : var(--s-mmkr-back);
-	color : var(--s-mmkr-text);
-}
-/* petitcoco (7) cc : 6.55 */
-.singer_7 {
-	background-color : var(--s-ptcc-back);
-	color : var(--s-ptcc-text);
-}
-
-/* yuco (9) cc : 4.55 */
 .singer_8m,
 *:is([theme=dark], [theme=extra]) .singer_8m.memcount_rep_name {
 	background-color : var(--s-yuco-text);
@@ -317,38 +262,6 @@ input[type=text]::placeholder {
 *:is([theme=dark], [theme=extra]) .singer_8m {
 	background-color : var(--s-yuco-back);
 	color : var(--s-yuco-text);
-}
-
-.singer_10 {
-	background-color : var(--s-ycmm-back);
-	color : var(--s-ycmm-text);
-}
-
-.singer_12 {
-	background-color : var(--s-yckr-back);
-	color : var(--s-yckr-text);
-}
-/* shiro (10) cc : 4.63 */
-.singer_16m,
-*:is([theme=dark], [theme=extra]) .singer_16m.memcount_rep_name {
-	background-color : var(--s-siro-text);
-	color : var(--s-siro-back);
-}
-.singer_16,
-*:is([theme=dark], [theme=extra]) .singer_16m {
-	background-color : var(--s-siro-back);
-	color : var(--s-siro-text);
-}
-/* chui (12) cc : 5.31 */
-.singer_32m,
-*:is([theme=dark], [theme=extra]) .singer_32m.memcount_rep_name {
-	background-color : var(--s-chui-text);
-	color : var(--s-chui-back);
-}
-.singer_32,
-*:is([theme=dark], [theme=extra]) .singer_32m {
-	background-color : var(--s-chui-back);
-	color : var(--s-chui-text);
 }
 
 /* search autocomplete section */

@@ -57,10 +57,10 @@
 	margin : 8vw 32vw;
 	padding : 2vw;
 	border-radius : 2vw;
-	border : .8vw solid SlateBlue;
+	border : .8vw solid var(--dialog-border);
 	text-align : center;
 	font-weight : bold;
 	font-size : 4vw;
-	background-color : DarkSlateBlue;
-	color : AliceBlue;
+	background-color : var(--dialog-back);
+	color : var(--dialog-text);
 }
