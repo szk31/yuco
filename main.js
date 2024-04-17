@@ -1,12 +1,12 @@
 // series search
 const series_lookup = {
-	"マクロス" : ["マクロス", "まくろす"],
-	"ラブライブ" : ["ラブライブ", "らぶらいぶ", "LL", "ll"],
-	"アイマス" : ["アイマス", "あいます", "デレマス", "でれます"],
-	"ジブリ" : ["ジブリ", "じぶり"],
-	"物語シリーズ" : ["物語シリーズ", "ものがたりしりーず", "ものがたりシリーズ"],
-	"まどマギ" : ["まどマギ", "まどまぎ", "まどか"],
-	"disney" : ["disney", "ディズニー", "でぃずにー", "Disney"]
+	"マクロス" : "マクロスまくろす",
+	"ラブライブ" : "ラブライブらぶらいぶll",
+	"アイマス" : "アイマスあいますデレマスでれます",
+	"ジブリ" : "ジブリじぶり",
+	"物語シリーズ" : "物語シリーズものがたりしりーず",
+	"まどマギ" : "まどマギまどまぎ",
+	"disney" : "disneyディズニーでぃずにー"
 };
 
 // indices lookup
@@ -28,7 +28,7 @@ const entry_idx = {
 	date : 1
 };
 
-const version = "1.7.3b";
+const version = "1.7.5";
 
 /* control / memories */
 
@@ -69,6 +69,9 @@ let memcount_rep_int;
 // pre-process song names
 let processed_song_name = [""];
 
+// pre-process song to be skipped
+let auto_skips = [];
+
 {	// theme
 	let theme = ls("theme");
 	if (!theme) {
@@ -108,6 +111,7 @@ function process_data() {
 	const lookup = [
 		["pcsl_s_showHidden", 1],
 		["pcsl_s_selecInput", 1],
+		["pcsl_s_autoAnyway", 0],
 		["pcsl_s_showRandom", 0],
 		["pcsl_s_ignoreRule", 0],
 		["pcsl_s_rep_select", 1],
@@ -124,6 +128,7 @@ function process_data() {
 	// read from local storage
 	setting.show_hidden     = ls("pcsl_s_showHidden") == 1;
 	setting.select_input    = ls("pcsl_s_selecInput") == 1;
+	setting.changeless_auto = ls("pcsl_s_autoAnyway") == 1;
 	setting.show_random     = ls("pcsl_s_showRandom") == 1;
 	setting.random_ignore   = ls("pcsl_s_ignoreRule") == 1;
 	setting.rep_select_input= ls("pcsl_s_rep_select") == 1;
@@ -138,6 +143,9 @@ function process_data() {
 	}
 	if (!setting.select_input) {
 		$("#setting_select>div").toggleClass("selected");
+	}
+	if (setting.changeless_auto) {
+		$("#setting_auto>div").toggleClass("selected");
 	}
 	if (setting.show_random) {
 		$("#setting_random>div").toggleClass("selected");
@@ -173,8 +181,9 @@ function process_data() {
 			$("#setting_extra_container>div").addClass("disabled");
 			break;
 		case "extra":
-			$("#setting_extra").click();
+			$("#setting_extra>div").toggleClass("selected");
 	}
+
 
 	// processing url para
 	init();
@@ -363,9 +372,9 @@ $(function() {
 			$(this).children().toggleClass("selected");
 			switch (this.id) {
 				case "setting_extra":
-					let cur_state = $("#dark_extra").hasClass("selected");
-					ls("theme", cur_state ? "extra" : "dark");
-					document.documentElement.setAttribute("theme", ls("theme"));
+					let cur_state = $("#dark_extra").hasClass("selected") ? "extra" : "dark";
+					ls("theme", cur_state);
+					document.documentElement.setAttribute("theme", cur_state);
 					break;
 				case "setting_hidden":
 					setting.show_hidden ^= 1;
@@ -376,6 +385,10 @@ $(function() {
 					setting.select_input ^= 1;
 					ls("pcsl_s_selecInput", setting.select_input ? "1" : "0");
 					break;
+				case "setting_auto":
+					setting.changeless_auto ^= 1;
+					ls("pcsl_s_autoAnyway", setting.changeless_auto ? "1" : "0");
+					break;
 				case "setting_random":
 					setting.show_random ^= 1;
 					$("#nav_search_random").toggleClass("blank", setting.show_random);
@@ -384,7 +397,7 @@ $(function() {
 					break;
 				case "setting_ignore":
 					setting.random_ignore ^= 1;
-					$("#nav_search_random").toggleClass("disabled", setting.search_by_song ? (setting.random_ignore ? false : loading !== "") : true);
+					$("#nav_search_random").toggleClass("disabled", setting.search_by_song ? (setting.random_ignore ? false : search_memory !== "") : true);
 					ls("pcsl_s_ignoreRule", setting.random_ignore ? "1" : "0");
 					break;
 				case "setting_release":
@@ -456,11 +469,14 @@ function init() {
 	$("#info_version").html(version);
 	$("#info_last-update").html(video[video.length - 1][video_idx.date]);
 	// get screen size
-	auto_display_max = Math.floor(5 * Math.pow(window.innerHeight / window.innerWidth, 1.41421356237));
+	auto_display_max = Math.floor(7 * window.innerHeight / window.innerWidth);
 	
 	// process song names
 	for (let i = 1; i < song.length; ++i) {
 		processed_song_name.push(song[i][song_idx.name].toLowerCase().normalize("NFKC"));
+		if (i > 2 && song[i][song_idx.name].trim() === song[i - 1][song_idx.name].trim()) {
+			auto_skips.push(i);
+		}
 	}
 }
 
@@ -534,8 +550,7 @@ function get_date_different(date1, date2 = today) {
 
 // get entry count of all entry and member-only entry that fufills mask
 function get_sang_count(id) {
-	let count = 0,
-		mem_count = 0;
+	let count = mem_count = 0;
 	for (var i in entry_proc[id]) {
 		count++;
 		if (entry[entry_proc[id][i]][entry_idx.note].includes("【メン限")) {
@@ -603,16 +618,16 @@ function jump2page(target) {
 	$(window).scrollTop(0);
 }
 
-let copy_popup_is_displaying = false;
+let copy_popup_flag = false;
 
 function copy_popup() {
-	if (copy_popup_is_displaying) {
+	if (copy_popup_flag) {
 		return;
 	}
-	copy_popup_is_displaying = true;
+	copy_popup_flag = true;
 	$("#copy_popup").attr("class", "fade_out");
 	setTimeout(() => {
-		copy_popup_is_displaying = false;
+		copy_popup_flag = false;
 		$("#copy_popup").attr("class", "hidden");
 	}, 1500);
 }
@@ -628,6 +643,6 @@ function refresh_bgColour() {
 	document.documentElement.setAttribute("theme", ls("theme"));
 }
 
-function ls(a, b) {
-	return b === undefined ? localStorage.getItem(a) : localStorage.setItem(a, b);
+function ls(key, value) {
+	return value === undefined ? localStorage.getItem(key) : localStorage.setItem(key, value);
 }

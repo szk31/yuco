@@ -65,52 +65,24 @@ $(function() {
 		});
 		
 		// filter - hide_block
-		$(document).on("click", "#filter_title", function() {
+		$(document).on("click", "#filter_display", function() {
 			$("#filter_close").toggleClass("closed");
 			$("#filter_content").toggleClass("hidden");
 		});
 		
-		// filter - entry - attr
-		$(document).on("click", ".filter_entry_attr_item", function() {
-			let e = this.id.replace(/(attr_container_)/, "");
+		// filter - anisong
+		$(document).on("click", ".filter_anisong", function() {
+			let e = this.id.replace("anisong_", "");
 			if (e === "all") {
-				// if selecting all
-				// check if it is previously selected
-				$(".attr_checkbox").toggleClass("selected", !$("#attr_" + e).hasClass("selected"));
-				for (let i in rep_attr) {
-					rep_attr[i] = $("#attr_" + e).hasClass("selected") ? 1 : 0;
-				}
-			} else {
-				$("#attr_" + e).toggleClass("selected");
-				rep_attr[e] ^= 1;
-				if (!$("#attr_" + e).hasClass("selected")) {
-					$("#attr_all").removeClass("selected");
-				} else {
-					for (let i in rep_attr) {
-						if (!rep_attr[i]) {
-							rep_search();
-							return;
-						}
-					}
-					$("#attr_all").addClass("selected");
-				}
-			}
-			rep_search();
-		});
-		
-		// filter - genre - anisong
-		$(document).on("click", ".filter_genre_anisong_item", function() {
-			let e = this.id.replace(/(genre_container_anisong_)/, "");
-			if (e === "all") {
-				$(".genre_anisong_checkbox").toggleClass("selected", !$("#anisong_all").hasClass("selected"));
+				$(".filter_anisong .checkbox").toggleClass("selected", !$("#anisong_all .checkbox").hasClass("selected"));
 				for (let i in rep_anisong) {
-					rep_anisong[i][0] = $("#anisong_all").hasClass("selected") ? 1 : 0;
+					rep_anisong[i][0] = $("#anisong_all .checkbox").hasClass("selected") ? 1 : 0;
 				}
 			} else {
-				$("#anisong_" + e).toggleClass("selected");
+				$(`#${this.id} .checkbox`).toggleClass("selected");
 				rep_anisong[e][0] ^= 1;
-				if (!$("#anisong_" + e).hasClass("selected")) {
-					$("#anisong_all").removeClass("selected");
+				if (!$(`#${this.id} .checkbox`).hasClass("selected")) {
+					$("#anisong_all .checkbox").removeClass("selected");
 				} else {
 					for (let i in rep_anisong) {
 						if (!rep_anisong[i][0]) {
@@ -118,25 +90,26 @@ $(function() {
 							return;
 						}
 					}
-					$("#anisong_all").addClass("selected");
+					$("#anisong_all .checkbox").addClass("selected");
 				}
 			}
 			rep_search();
 		});
 		
-		// filter - genre - general
-		$(document).on("click", ".filter_genre_general_item", function() {
-			let e = this.id.replace(/(genre_container_general_)/, "");
+		// filter - genre
+		$(document).on("click", ".filter_genre", function() {
+			let e = this.id.replace("genre_", "");
+			const all = "#genre_all .checkbox";
 			if (e === "all") {
-				$(".genre_general_checkbox").toggleClass("selected", !$("#general_all").hasClass("selected"));
+				$(".filter_genre .checkbox").toggleClass("selected", !$(all).hasClass("selected"));
 				for (let i in rep_genre) {
-					rep_genre[i][0] = $("#general_all").hasClass("selected") ? 1 : 0;
+					rep_genre[i][0] = $(all).hasClass("selected") ? 1 : 0;
 				}
 			} else {
-				$("#general_" + e).toggleClass("selected");
+				$(`#${this.id} .checkbox`).toggleClass("selected");
 				rep_genre[e][0] ^= 1;
-				if (!$("#general_" + e).hasClass("selected")) {
-					$("#general_all").removeClass("selected");
+				if (!$(`#${this.id} .checkbox`).hasClass("selected")) {
+					$(all).removeClass("selected");
 				} else {
 					for (let i in rep_genre) {
 						if (!rep_genre[i][0]) {
@@ -144,28 +117,28 @@ $(function() {
 							return;
 						}
 					}
-					$("#general_all").addClass("selected");
+					$(all).addClass("selected");
 				}
 			}
 			rep_search();
 		});
 		
 		// filter - sort - sort options
-		$(document).on("click", ".filter_sort_item", function() {
-			let e = this.id.replace(/(sort_container_)/, "");
+		$(document).on("click", ".filter_sort", function() {
+			let e = this.id.replace("sort_", "");
 			// check if clicking on the same item
 			if (setting.rep_sort === e) {
 				return;
 			}
-			$(".sort_checkbox").removeClass("selected");
-			$("#sort_" + e).addClass("selected");
+			$(".filter_sort .radio").removeClass("selected");
+			$(`#${this.id} .radio`).addClass("selected");
 			setting.rep_sort = e;
 			update_rep_sort_display();
 			rep_display();
 		});
 		
 		// filter - sort - asd/des
-		$(document).on("click", ".filter_sort2_item", function() {
+		$(document).on("click", "#filter_asd", function() {
 			// swap sort way
 			setting.rep_sort_asd ^= 1;
 			// update text
@@ -173,19 +146,19 @@ $(function() {
 			rep_display();
 		});
 		
-		// filter - if display selecetd first
-		$(document).on("click", ".filter_sort3_item", function() {
-			setting.rep_selected_first ^= 1;
-			$(".sort3_checkbox").toggleClass("selected", setting.rep_selected_first);
+		// filter - display items
+		$(document).on("click", ".filter_display", function() {
+			rep_info[this.id.replace("display_", "")] ^= 1;
+			$("#" + this.id + " .checkbox").toggleClass("selected");
 			// update
 			rep_display();
 		});
 		
-		// filter - display
-		$(document).on("click", ".filter_display_item", function() {
-			var e = $(this).attr("id").replace(/(display_container_)/, "");
-			$("#display_" + e).toggleClass("selected");
-			rep_info[e] ^= 1;
+		// filter - if display selecetd first
+		$(document).on("click", "#sort_selected", function() {
+			setting.rep_selected_first ^= 1;
+			$("#" + this.id + " .checkbox").toggleClass("selected");
+			// update
 			rep_display();
 		});
 		
@@ -194,17 +167,15 @@ $(function() {
 			if (is_long_pressing) {
 				return;
 			}
-			let e = parseInt(this.id.replace(/(rep_song_)/, ""));
+			let song_id = parseInt(this.id.replace("rep_song_", ""));
 			if ($(this).hasClass("selected")) {
-				rep_selected.splice(rep_selected.indexOf(e), 1);
-				if (rep_selected.length === 0) {
+				rep_selected.splice(rep_selected.indexOf(song_id), 1);
+				if (!rep_selected.length) {
 					$("#nav_share").addClass("disabled");
-					$("#nav_bulk_search").addClass("disabled");
 				}
 			} else {
-				rep_selected.push(e);
+				rep_selected.push(song_id);
 				$("#nav_share").removeClass("disabled");
-				$("#nav_bulk_search").removeClass("disabled");
 			}
 			$(this).toggleClass("selected");
 		});
@@ -318,55 +289,36 @@ function rep_search(force = false) {
 	// check if input has been updated
 	if (input_value !== rep_input_memory) {
 		rep_input_memory = input_value;
-	} else if (!force && input_value !== "") {
+	} else if (!force && input_value) {
 		// if input didnt changed and is not blank
 		return;
 	}
-	if (rep_input_memory !== "") {
-		rep_hits = [];
-		rep_hits_count = 0;
+	rep_hits = [];
+	if (input_value) {
 		// returning search result by input
 		for (let i = 1; i < song.length; ++i) {
-			if (entry_proc[i].length === 0) {
+			if (!entry_proc[i].length) {
 				continue;
 			}
-			if (processed_song_name[i].search(input_value.toLowerCase()) !== -1 ||
-				song[i][song_idx.reading].search(input_value) !== -1
-				) {
-				rep_hits[rep_hits_count++] = i;
+			if (processed_song_name[i].includes(input_value) || song[i][song_idx.reading].includes(input_value)) {
+				rep_hits.push(i);
 			}
 		}
 		rep_display();
 		return;
 	}
 	// get mask
-	let mask = 0;
-	rep_hits = [];
-	rep_hits_count = 0;
-	for (let i in rep_anisong) {
-		mask += rep_anisong[i][0] << rep_anisong[i][1];
-	}
-	for (let i in rep_genre) {
-		mask += rep_genre[i][0] << rep_genre[i][1];
-	}
-	// remove flag
-	let inv_mask = 0;
-	for (let i in rep_anisong) {
-		if (i === "other") {
-			continue;
-		}
-		inv_mask += (1 - rep_anisong[i][0]) << rep_anisong[i][1];
-	}
+	let mask = inv_mask = 0;
+	// combine both mask_object and create binary mask
+	Object.values(rep_anisong).concat(Object.values(rep_genre)).forEach(x => mask += x[0] << x[1]);
+	Object.values(rep_anisong).forEach(x => inv_mask += x[0] << x[1]);
+	inv_mask = ~inv_mask & 28;	// 28: 0b11100, the only 3 bits used in anisong filter 
 	// search
-	for (let i = 0; i < song.length; ++i) {
-		if (song[i][song_idx.attr] & mask) {
-			if (inv_mask) {
-				// remove song thats deselected
-				if (song[i][song_idx.attr] & inv_mask) {
-					continue;
-				}
-			}
-			rep_hits[rep_hits_count++] = i;
+	for (i in song) {
+		if (song[i][song_idx.attr] & mask &&	// satisflies filter mask
+		  !(song[i][song_idx.attr] & inv_mask)	// does not satisfly inverse filter mask
+		) {
+			rep_hits.push(i);
 		}
 	}
 	rep_display();
@@ -375,28 +327,16 @@ function rep_search(force = false) {
 let rep_display_inter;
 
 function rep_display() {
+	$("#rep_count").html(`hit${rep_hits.length > 1 ? "s" : ""}: ${rep_hits.length}`);
 	if (setting.rep_selected_first) {
 		// remove selected item in main array
-		for (let i in rep_selected) {
-			if (rep_hits.indexOf(rep_selected[i]) === -1) {
-				continue;
-			}
-			rep_hits.splice(rep_hits.indexOf(rep_selected[i]), 1);
-		}
+		rep_hits = rep_hits.filter(val => !rep_selected.includes(val));
 	}
-
-	// get member
 	$("#rep_display").html("");
 	// sort record
 	switch (setting.rep_sort) {
-		case "50" :
-			// default, do nothing
-			rep_hits.sort((a, b) => {
-				return a - b;
-			});
-			if (!setting.rep_sort_asd) {
-				rep_hits.reverse();
-			}
+		case "50" : // default, do nothing
+			rep_hits.sort((a, b) => (setting.rep_sort_asd ? 1 : -1) * (a - b));
 			break;
 		case "count" :
 			// sang entry count
@@ -432,10 +372,6 @@ function rep_display() {
 			});
 			break;
 		}
-		default : 
-			// anything else is error
-			console.log("rep_sort of type \"" + setting.rep_sort + "\" not found");
-			return;
 	}
 	if (setting.rep_selected_first) {
 		// add selected back into main array
@@ -453,9 +389,7 @@ let rep_loading_progress = 0;
 function rep_display_loop() {
 	let load_end = Math.min(rep_loading_progress + 20, rep_hits.length);
 	for (let i = rep_loading_progress; i < load_end; ++i) {
-		// sang count
 		let sang_count = get_sang_count(rep_hits[i]);
-		// last sang
 		let last_sang = get_last_sang(rep_hits[i]);
 		let delta_last = last_sang === 0 ? -1 : get_date_different(last_sang);
 		let temp_html = "";
@@ -495,5 +429,5 @@ function update_rep_sort_display() {
 			// error
 			return 1;
 	}
-	$("#sort_name_sort").html(temp);
+	$("#filter_asd div:nth-child(2)").html(temp);
 }

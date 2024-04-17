@@ -23,23 +23,27 @@
 	border-radius: 4vw;
 }
 
-#filter_title {
+#filter_display {
 	display : flex;
+	align-items: center;
 }
 
-#filter_title_name {
-	padding-left: 1.2vw;
-	flex-grow : 1;
-	font-size : 4.4vw;
-	display: flex;
-	align-items: center;
+#filter_display div:first-child {
+	flex-grow: 1;
+	padding: 0 1.2vw;
+	font-size: 4.4vw;
+}
+
+#rep_count {
+	margin: 1vw 2vw 0 0;
+	text-align: end;
+	font-size: 3vw;
 }
 
 #filter_close {
 	content : var(--ico-arrow-alt);
 	width : 6vw;
 	height : 6vw;
-	align-items : center;
 	margin: 1vw 2vw;
 	filter: var(--black-icon);
 }
@@ -48,48 +52,28 @@
 	transform : rotate(180deg);
 }
 
-.filter_subblock_title {
+.filter_title {
 	border-bottom : 0.5vw solid var(--filter-text);
-	width :88vw;
-	margin : 0.6vw 0.6vw 1vw;
+	width: 88vw;
+	margin : 0.6vw;
 	padding-left : 2.6vw;
 	font-size : 3.6vw;
 }
 
-.filter_subblock_content {
+.filter_subblock {
 	background-color : var(--filter-back-alt);
 	border-radius : 2.4vw;
 	padding : 1.5vw;
 }
 
-.filter_entry_attr_item, 
-.filter_genre_anisong_item,
-.filter_genre_general_item,
-.filter_sort_item,
-.filter_sort2_item,
-.filter_sort3_item,
-.rep_item,
-.filter_display_item {
+.filter_subblock label {
 	display : flex;
 	align-items: center;
 	padding-left: 1.6vw;
 	height: 6vw;
 }
 
-.filter_singer_group_extra {
-	display : grid;
-	width : 80%;
-	grid-template-columns: 50% 50%;
-}
-
-.filter_singer_group_extra .filter_singer_group {
-	display : grid;
-	grid-template-columns: 20% 70%;
-}
-
-.genre_name,
-.sort_name,
-.display_name {
+label div:nth-child(2) {
 	padding-left: 0.8vw;
 }
 
@@ -100,6 +84,7 @@
 	padding : 1.2vw 1.6vw 0.6vw;
 	border-radius : 2vw;
 	color: var(--song-text);
+	background-color : var(--song-display);
 	outline : 0.25vw solid var(--dialog-border);
 }
 
@@ -111,10 +96,6 @@
 	background-color : var(--song-display-alt);
 }
 
-.rep_song_container:not(.rep_mem_only) {
-	background-color : var(--song-display);
-}
-
 .rep_song_row1 {
 	display: grid;
 	grid-template-columns: 100% 20%;
@@ -124,7 +105,6 @@
 	height : 1.25em;
 	line-height : 1.25em;
 	overflow : hidden;
-	overflow-inline : hidden;
 }
 
 .rep_song_nooke {
@@ -213,6 +193,10 @@
 	filter: var(--share-icon);
 }
 
+.rep_share_text {
+	font-size: 3.6vw;
+}
+
 #rep_tweet {
 	position : absolute;
 	left : 50%;
@@ -239,13 +223,13 @@
 #rep_tweet_artist {
 	display: grid;
 	grid-template-columns: 50% 50%;
-	margin: 0.2vh 2vw 2.4vh;
+	margin: 0.2vh 2vw 2vh;
 }
 
 .rep_tweet_a {
 	margin: 0.5vh 2vw;
 	padding: 0.8vh;
-	height: 2.4vh;
+	height: 4vh;
 	background-color: var(--dialog-back-alt);
 	border: 0.4vh solid var(--trnsp);
 	border-radius: 2vw;
@@ -266,7 +250,7 @@
 .rep_tweet_submit {
 	margin: 0.6vh 4vw 1.4vh;
 	padding: 1.2vh;
-	height: 2.5vh;
+	height: 5vh;
 	background-color: var(--dialog-back-alt);
 	border-radius: 2vw;
 
@@ -292,28 +276,24 @@
 	filter: var(--share-icon);
 }
 
-/* general stuff */
-.grid_block-2,
-.grid_block-3,
-.grid_block-4,
-.grid_block-3_type2 {
-	display : grid;
+.rep_tweet_tag {
+	font-size: 3.2vw;
 }
 
+/* general stuff */
 .grid_block-2 {
+	display : grid;
 	grid-template-columns: 45% 45%;
 }
 
 .grid_block-3 {
+	display : grid;
 	grid-template-columns: 32% 32% 30%;
 }
 
 .grid_block-4 {
+	display : grid;
 	grid-template-columns: 20% 30% 25% 24%;
-}
-
-.grid_block-3_type2 {
-	grid-template-columns: 40% 40% 20%;
 }
 
 .rowspan-2 {
@@ -324,58 +304,11 @@
 	grid-column : 1 / 3 span;
 }
 
-.colspan-2 {
-	grid-row : 1 / span 2;
-}
-
-.col-1 {
-	grid-column : 1;
-}
-
-.col-2 {
-	grid-column : 2;
-}
-
-.col-3 {
-	grid-column : 3;
-}
-
-.col-4 {
-	grid-column : 4;
-}
-
-.col-5 {
-	grid-column : 5;
-}
-
-.row-1 {
-	grid-row : 1;
-}
-
-.row-2 {
-	grid-row : 2;
-}
-
-.row-3 {
-	grid-row : 3;
-}
-
-.row-4 {
-	grid-row : 4;
-}
-
-.row-5 {
-	grid-row : 5;
-}
-
 .checkbox,
 .switch {
 	width : 5vw;
 	height : 5vw;
 	margin : 0.6vw;
-
-	display: flex;
-	align-content: center;
 }
 
 .checkbox.selected {
@@ -386,9 +319,8 @@
 	content : var(--cbx-minus);
 }
 
-.search_grid_2 .checkbox:not(.selected),
-.sort3_checkbox:not(.selected),
-#list_artist_cb:not(.selected) {
+#sort_selected .checkbox:not(.selected),
+.filter_display .checkbox:not(.selected) {
 	content : var(--cbx-cross);
 }
 
@@ -397,15 +329,12 @@
 }
 
 .radio {
-	margin : 0.8vw 1vw 0.6vw;
+	margin : 0.8vw 1vw;
 	width : 4.4vw;
 	height : 4.4vw;
 	border-radius : 3vw;
 	border : 0.8vw solid var(--radio-border);
 	outline : 0.3vw solid var(--radio-outline);
-
-	display: flex;
-	align-items: center;
 }
 
 .radio.selected {

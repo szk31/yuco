@@ -23,24 +23,23 @@
 		<!--script type="text/javascript" src="main.js"></script>
 		<script type="text/javascript" src="search.js"></script>
 		<script type="text/javascript" src="rep.js"></script-->
-		<!-- css -->
 		<style>
 			#loading_overlay {
-				position : fixed;
-				top : 0;
-				width : 100%;
-				height : 100%;
-				background-color : Black;
-				z-index : 2147483646;
+				position: fixed;
+				font-size: 20px;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.666);
+				z-index: 99;
+				color: white;
 			}
 
 			#loading_text {
-				position : fixed;
-				color : White;
-				font-size : 20px;
-				font-weight : bold;
-				left : 50%;
-				top : 50%;
+				position: fixed;
+				font-weight: bold;
+				left: 50%;
+				top: 50%;
 				transform: translate(-50%, -50%);
 			}
 
@@ -84,31 +83,27 @@
 			<div id="home_hyper_rep" class="home_hyperlink_block">レパートリー</div>
 		</div>
 		<div id="search_section" class="section_container hidden">
-			<div id="input_container">
-				<input id="input" type="text" placeholder="曲名/読みで検索" autocomplete="off">
-				<div id="search_options_button_container">
-					<div href="#" id="search_options_button"></div>
-				</div>
+			<div id="search_input_container">
+				<input id="search_input" type="text" placeholder="曲名/読みで検索" autocomplete="off">
+				<div id="ser_opt_button"></div>
 			</div>
-			<div id="search_options_container" class="hidden">
-				<div class="search_options_title">検索方法</div>
-				<div class="search_options_underline"></div>
-				<div class="search_options_subblock search_grid_2">
-					<label id="search_options_songname" class="search_option_group1 col-1">
-						<div id="search_options_btn_songname" class="radio search_options_radio selected"></div>
-						<div class="attr_name">曲名</div>
+			<div id="ser_opt_container" class="hidden">
+				<div class="ser_opt_title">検索方法</div>
+				<div class="ser_opt_block search_grid_2">
+					<label id="ser_opt_songname" class="ser_opt_gp1">
+						<div class="radio selected"></div>
+						<div>曲名</div>
 					</label>
-					<label id="search_options_artist" class="search_option_group1 col-2">
-						<div id="search_options_btn_artist" class="radio search_options_radio"></div>
-						<div class="attr_name">アーティスト名</div>
+					<label id="ser_opt_artist" class="ser_opt_gp1">
+						<div class="radio"></div>
+						<div>アーティスト名</div>
 					</label>
 				</div>
-				<div class="search_options_title">並び順</div>
-				<div class="search_options_underline"></div>
-				<div class="search_options_subblock search_grid_3">
-					<label id="search_options_asd" class="search_option_group3 col-1">
-						<div id="search_options_btn_asd" class="switch search_options_checkbox selected"></div>
-						<div class="attr_name">古い順&nbsp;(⇌新しい順)</div>
+				<div class="ser_opt_title">並び順</div>
+				<div class="ser_opt_block">
+					<label id="ser_opt_asd">
+						<div class="switch"></div>
+						<div>古い順&nbsp;(⇌新しい順)</div>
 					</label>
 				</div>
 			</div>
@@ -117,103 +112,113 @@
 		<div id="repertoire_section" class="section_container hidden">
 			<input id="rep_input" type="text" placeholder="曲名/読みで検索" autocomplete="off">
 			<div id="filter_container">
-				<div id="filter_title">
-					<div id="filter_title_name">フィルタ/並び順</div>
+				<div id="filter_display">
+					<div>フィルタ/並び順</div>
+					<div id="rep_count"></div>
 					<div id="filter_close" class="closed"></div>
 				</div>
 				<div id="filter_content" class="hidden">
-					<div id="filter_genre_anisong_container" class="filter_subblock_content grid_block-3">
-						<p class="filter_subblock_title row-1 rowspan-3">ジャンル - アニソン</p>
-						<label id="genre_container_anisong_all" class="filter_genre_anisong_item row-2 col-1">
-							<div id="anisong_all" class="checkbox genre_anisong_checkbox selected"></div>
-							<div class="genre_name">全部</div>
+					<div class="filter_subblock grid_block-3">
+						<p class="filter_title rowspan-3">ジャンル - アニソン</p>
+						<label id="anisong_all" class="filter_anisong">
+							<div class="checkbox selected"></div>
+							<div>全部</div>
 						</label>
-						<label id="genre_container_anisong_lovelive" class="filter_genre_anisong_item row-2 col-2">
-							<div id="anisong_lovelive" class="checkbox genre_anisong_checkbox selected"></div>
-							<div class="genre_name">ラブライブ</div>
+						<label id="anisong_lovelive" class="filter_anisong">
+							<div class="checkbox selected"></div>
+							<div>ラブライブ</div>
 						</label>
-						<label id="genre_container_anisong_imas" class="filter_genre_anisong_item row-2 col-3">
-							<div id="anisong_imas" class="checkbox genre_anisong_checkbox selected"></div>
-							<div class="genre_name">アイマス</div>
+						<label id="anisong_imas" class="filter_anisong">
+							<div class="checkbox selected"></div>
+							<div>アイマス</div>
 						</label>
-						<label id="genre_container_anisong_macros" class="filter_genre_anisong_item row-3 col-1">
-							<div id="anisong_macros" class="checkbox genre_anisong_checkbox selected"></div>
-							<div class="genre_name">マクロス</div>
+						<label id="anisong_macros" class="filter_anisong">
+							<div class="checkbox selected"></div>
+							<div>マクロス</div>
 						</label>
-						<label id="genre_container_anisong_other" class="filter_genre_anisong_item row-3 col-2">
-							<div id="anisong_other" class="checkbox genre_anisong_checkbox selected"></div>
-							<div class="genre_name">その他</div>
+						<label id="anisong_other" class="filter_anisong">
+							<div class="checkbox selected"></div>
+							<div>その他</div>
 						</label>
-						<div class="general_vertical_space row-4 rowspan-3"></div>
-						<p class="filter_subblock_title row-5 rowspan-3">ジャンル - その他</p>
-						<label id="genre_container_general_all" class="filter_genre_general_item row-6 col-1">
-							<div id="general_all" class="checkbox genre_general_checkbox selected"></div>
-							<div class="genre_name">全部</div>
+						<div></div>
+						<div class="general_vertical_space rowspan-3"></div>
+						<p class="filter_title rowspan-3">ジャンル - その他</p>
+						<label id="genre_all" class="filter_genre">
+							<div class="checkbox selected"></div>
+							<div>全部</div>
 						</label>
-						<label id="genre_container_general_jpop" class="filter_genre_general_item row-6 col-2">
-							<div id="general_jpop" class="checkbox genre_general_checkbox selected"></div>
-							<div class="genre_name">J-POP</div>
+						<label id="genre_jpop" class="filter_genre">
+							<div class="checkbox selected"></div>
+							<div>J-POP</div>
 						</label>
-						<label id="genre_container_general_voc" class="filter_genre_general_item row-6 col-3">
-							<div id="general_voc" class="checkbox genre_general_checkbox selected"></div>
-							<div class="genre_name">ボカロ</div>
+						<label id="genre_voc" class="filter_genre">
+							<div class="checkbox selected"></div>
+							<div>ボカロ</div>
 						</label>
-						<label id="genre_container_general_jib" class="filter_genre_general_item row-7 col-1">
-							<div id="general_jib" class="checkbox genre_general_checkbox selected"></div>
-							<div class="genre_name">ジブリ</div>
+						<label id="genre_jib" class="filter_genre">
+							<div class="checkbox selected"></div>
+							<div>ジブリ</div>
 						</label>
-						<label id="genre_container_general_kay" class="filter_genre_general_item row-7 col-2">
-							<div id="general_kay" class="checkbox genre_general_checkbox selected"></div>
-							<div class="genre_name">歌謡曲</div>
+						<label id="genre_tok" class="filter_genre">
+							<div class="checkbox selected"></div>
+							<div>特撮</div>
 						</label>
-						<label id="genre_container_general_dis" class="filter_genre_general_item row-7 col-3">
-							<div id="general_dis" class="checkbox genre_general_checkbox selected"></div>
-							<div class="genre_name">ディズニー</div>
+						<label id="genre_rock" class="filter_genre">
+							<div class="checkbox selected"></div>
+							<div>ロック</div>
 						</label>
-						<label id="genre_container_general_other" class="filter_genre_general_item row-8 col-1">
-							<div id="general_other" class="checkbox genre_general_checkbox selected"></div>
-							<div class="genre_name">その他</div>
+						<label id="genre_kay" class="filter_genre">
+							<div class="checkbox selected"></div>
+							<div>歌謡曲</div>
 						</label>
-					</div>
-					<div class="general_vertical_space"></div>
-					<div id="filter_sort_container" class="filter_subblock_content grid_block-2">
-						<p class="filter_subblock_title row-1 rowspan-2">並び順</p>
-						<label id="sort_container_50" class="filter_sort_item row-2 col-1">
-							<div id="sort_50" class="radio sort_checkbox selected"></div>
-							<div class="sort_name">50音順</div>
+						<label id="genre_dis" class="filter_genre">
+							<div class="checkbox selected"></div>
+							<div>ディズニー</div>
 						</label>
-						<label id="sort_container_count" class="filter_sort_item row-2 col-2">
-							<div id="sort_count" class="radio sort_checkbox"></div>
-							<div class="sort_name">歌った回数順</div>
-						</label>
-						<label id="sort_container_date" class="filter_sort_item row-3 col-1">
-							<div id="sort_date" class="radio sort_checkbox"></div>
-							<div class="sort_name">最後歌った順</div>
-						</label>
-						<label id="sort_container_release" class="filter_sort_item row-3 col-2">
-							<div id="sort_release" class="radio sort_checkbox"></div>
-							<div class="sort_name">リリース順</div>
-						</label>
-						<p class="filter_subblock_title row-4 rowspan-2"></p>
-						<label id="sort_container_sort" class="filter_sort2_item row-5 col-1">
-							<div id="sort_sort" class="switch sort2_checkbox selected"></div>
-							<div id="sort_name_sort" class="sort_name">正順 (⇌逆順)</div>
-						</label>
-						<label id="sort_container_selected" class="filter_sort3_item row-5 col-2">
-							<div id="sort_selected" class="checkbox sort3_checkbox"></div>
-							<div id="sort_name_selected" class="sort_name">選択済み優先</div>
+						<label id="genre_other" class="filter_genre">
+							<div class="checkbox selected"></div>
+							<div>その他</div>
 						</label>
 					</div>
 					<div class="general_vertical_space"></div>
-					<div id="filter_display_container" class="filter_subblock_content grid_block-2">
-						<p class="filter_subblock_title row-1 rowspan-2">表示アイテム</p>
-						<label id="display_container_date" class="filter_display_item row-2 col-1">
-							<div id="display_date" class="checkbox display_checkbox selected"></div>
-							<div class="display_name">前回日付</div>
+					<div class="filter_subblock grid_block-2">
+						<p class="filter_title rowspan-2">並び順</p>
+						<label id="sort_50" class="filter_sort">
+							<div class="radio selected"></div>
+							<div>50音順</div>
 						</label>
-						<label id="display_container_attrdata" class="filter_display_item row-2 col-2">
-							<div id="display_attrdata" class="checkbox display_checkbox selected"></div>
-							<div class="display_name">弾き語り/音源</div>
+						<label id="sort_count" class="filter_sort">
+							<div class="radio"></div>
+							<div>歌った回数順</div>
+						</label>
+						<label id="sort_date" class="filter_sort">
+							<div class="radio"></div>
+							<div>最後歌った順</div>
+						</label>
+						<label id="sort_release" class="filter_sort">
+							<div class="radio"></div>
+							<div>リリース順</div>
+						</label>
+						<p class="filter_title rowspan-2"></p>
+						<label id="filter_asd">
+							<div class="switch"></div>
+							<div>正順 (⇌逆順)</div>
+						</label>
+						<label id="sort_selected">
+							<div class="checkbox"></div>
+							<div>選択済み優先</div>
+						</label>
+					</div>
+					<div class="general_vertical_space"></div>
+					<div class="filter_subblock grid_block-2">
+						<p class="filter_title rowspan-2">表示アイテム</p>
+						<label id="display_date" class="filter_display">
+							<div class="checkbox selected"></div>
+							<div>前回日付</div>
+						</label>
+						<label id="display_attrdata" class="filter_display">
+							<div class="checkbox selected"></div>
+							<div>弾き語り/音源</div>
 						</label>
 					</div>
 				</div>
@@ -341,7 +346,7 @@
 					<div id="rep_tweet_ya" class="rep_tweet_a selected">含む</div>
 					<div id="rep_tweet_no" class="rep_tweet_a">含まない</div>
 				</div>
-				<div id="rep_tweet_y" class="rep_tweet_submit extra hidden">
+				<div id="rep_tweet_y" class="rep_tweet_submit">
 					<span class="rep_tweet_birb"></span>
 					<span class="rep_tweet_tag">#つきみゆこ</span>
 				</div>
