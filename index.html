@@ -20,6 +20,7 @@
 		<script type="text/javascript" src="yuco_data.js"></script>
 		<!-- script -->
 		<script type="text/javascript" src="scr_min.js"></script>
+		<script type="text/javascript" src="r2k_min.js"></script>
 		<!--script type="text/javascript" src="main.js"></script>
 		<script type="text/javascript" src="search.js"></script>
 		<script type="text/javascript" src="rep.js"></script-->
@@ -256,6 +257,13 @@
 				<div id="settings_inner">
 					<div class="settings_title">設定</div>
 					<div class="settings_inner_title">全般</div>
+					<div id="setting_extra_container" class="settings_option hidden">
+						<div>エキストラ設定表示</div>
+						<div id="setting_set_show_hidden" class="two_way">
+							<div>する</div>
+							<div class="selected">しない</div>
+						</div>
+					</div>
 					<div class="settings_option">
 						<div>表示色</div>
 						<div id="three_way_theme">
@@ -264,9 +272,9 @@
 							<div id="three_way_dark">D</div>
 						</div>
 					</div>
-					<div id="setting_extra_container" class="settings_option hidden">
+					<div class="settings_option settings_extra hidden">
 						<div>ダークモード</div>
-						<div id="setting_extra" class="two_way">
+						<div id="setting_dark" class="two_way">
 							<div id="dark_normal" class="selected">通常</div>
 							<div id="dark_extra">EX</div>
 						</div>
@@ -274,28 +282,50 @@
 					<div class="settings_inner_title">曲検索</div>
 					<div class="settings_option">
 						<div>非公開動画表示</div>
-						<div id="setting_hidden" class="two_way">
-							<div class="selected">表示</div>
-							<div>非表示</div>
+						<div id="setting_ser_show_private" class="two_way">
+							<div class="selected">する</div>
+							<div>しない</div>
 						</div>
 					</div>
 					<div class="settings_option">
 						<div>入力自動選択</div>
-						<div id="setting_select" class="two_way">
+						<div id="setting_ser_select_input" class="two_way">
 							<div class="selected">する</div>
 							<div>しない</div>
 						</div>
 					</div>
 					<div class="settings_option">
 						<div>ランダムボタン表示</div>
-						<div id="setting_random" class="two_way">
-							<div>表示</div>
-							<div class="selected">非表示</div>
+						<div id="setting_ser_rand_show" class="two_way">
+							<div>する</div>
+							<div class="selected">しない</div>
 						</div>
 					</div>
 					<div class="settings_option">
-						<div class="setting_req_random">ランダム条件無視</div>
-						<div id="setting_ignore" class="two_way setting_req_random">
+						<div>ランダム条件無視</div>
+						<div id="setting_ser_rand_req_empty" class="two_way setting_req_random disabled">
+							<div class="selected">する</div>
+							<div>しない</div>
+						</div>
+					</div>
+					<div class="settings_inner_title">入力予想</div>
+					<div class="settings_option">
+						<div>変更時のみ表示</div>
+						<div id="setting_pdt_on_change_only" class="two_way">
+							<div>する</div>
+							<div class="selected">しない</div>
+						</div>
+					</div>
+					<div class="settings_option">
+						<div>読み仮名表示</div>
+						<div id="setting_pdt_reading" class="two_way">
+							<div class="selected">する</div>
+							<div>しない</div>
+						</div>
+					</div>
+					<div class="settings_option settings_extra hidden">
+						<div>選択時コピー</div>
+						<div id="setting_pdt_copy_on_select" class="two_way">
 							<div>する</div>
 							<div class="selected">しない</div>
 						</div>
@@ -303,25 +333,38 @@
 					<div class="settings_inner_title">レパートリー</div>
 					<div class="settings_option">
 						<div>入力自動選択</div>
-						<div id="setting_rep_select" class="two_way">
+						<div id="setting_rep_select_input" class="two_way">
 							<div class="selected">する</div>
 							<div>しない</div>
+						</div>
+					</div>
+					<div class="settings_option">
+						<div>リリース日付表示</div>
+						<div id="setting_rep_show_release" class="two_way">
+							<div>する</div>
+							<div class="selected">しない</div>
 						</div>
 					</div>
 					<div class="settings_option">
 						<div>曲名長押しコピー</div>
-						<div id="setting_copy" class="two_way">
+						<div id="setting_rep_long_press_copy" class="two_way">
 							<div class="selected">する</div>
 							<div>しない</div>
 						</div>
 					</div>
 					<div class="settings_option">
-						<div class="setting_copy_time">長押し時間(秒)</div>
+						<div class="setting_rep_copy_time">長押し時間(秒)</div>
 						<div id="three_way_time" class="setting_copy_time">
 							<div id="three_way_400">0.4</div>
 							<div id="three_way_600" class="selected">0.6</div>
 							<div id="three_way_800">0.8</div>
 						</div>
+					</div>
+					<div id="settings_reset_confirm" class="blank">本当に設定をリセットしますか</div>
+					<div class="settings_reset">
+						<span id="settings_reset_button">リセット</span>
+						<span id="settings_reset_nah" class="hidden">取り消し</span>
+						<span id="settings_reset_yes" class="hidden">リセット</span>
 					</div>
 				</div>
 			</div>

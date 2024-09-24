@@ -127,12 +127,12 @@ $(function() {
 		$(document).on("click", ".filter_sort", function() {
 			let e = this.id.replace("sort_", "");
 			// check if clicking on the same item
-			if (setting.rep_sort === e) {
+			if (settings.rep_sort_method.value === e) {
 				return;
 			}
 			$(".filter_sort .radio").removeClass("selected");
 			$(`#${this.id} .radio`).addClass("selected");
-			setting.rep_sort = e;
+			settings.rep_sort_method.value = e;
 			update_rep_sort_display();
 			rep_display();
 		});
@@ -140,7 +140,7 @@ $(function() {
 		// filter - sort - asd/des
 		$(document).on("click", "#filter_asd", function() {
 			// swap sort way
-			setting.rep_sort_asd ^= 1;
+			settings.rep_sort_asd.value ^= 1;
 			// update text
 			update_rep_sort_display();
 			rep_display();
@@ -149,15 +149,15 @@ $(function() {
 		// filter - display items
 		$(document).on("click", ".filter_display", function() {
 			rep_info[this.id.replace("display_", "")] ^= 1;
-			$("#" + this.id + " .checkbox").toggleClass("selected");
+			$(`#${this.id} .checkbox`).toggleClass("selected");
 			// update
 			rep_display();
 		});
 		
 		// filter - if display selecetd first
 		$(document).on("click", "#sort_selected", function() {
-			setting.rep_selected_first ^= 1;
-			$("#" + this.id + " .checkbox").toggleClass("selected");
+			settings.rep_selected_first.value ^= 1;
+			$("#sort_selected .checkbox").toggleClass("selected");
 			// update
 			rep_display();
 		});
@@ -182,7 +182,7 @@ $(function() {
 		
 		// display - long press copy
 		$(document).on("mousedown touchstart", ".rep_song_container", function() {
-			if (!setting.longPress_copy) {
+			if (!settings.rep_long_press_copy.value) {
 				return;
 			}
 			let e = parseInt(this.id.replace(/(rep_song_)/, ""));
@@ -193,8 +193,8 @@ $(function() {
 				post_longpress_timer = setTimeout(function() {
 					is_long_pressing = false;
 					clearTimeout(post_longpress_timer);
-				}, setting.longPress_time - 100);
-			}, setting.longPress_time);
+				}, settings.rep_long_press_time.value - 100);
+			}, settings.rep_long_press_time.value);
 		});
 		
 		// display - long press copy (disabling)
@@ -248,18 +248,18 @@ $(function() {
 		});
 
 		$(document).on("click", ".rep_tweet_a", function() {
-			if (setting.rep_show_artist == (this.id === "rep_tweet_ya")) {
+			if (settings.rep_show_artist.value == (this.id === "rep_tweet_ya")) {
 				return;
 			}
-			setting.rep_show_artist ^= 1;
+			settings.rep_show_artist.value ^= 1;
 			$(".rep_tweet_a").toggleClass("selected");
-			ls("pcsl_s_rep_artist", setting.rep_show_artist ? 1 : 0);
+			update_setting("rep_show_artist");
 		});
 
 		$(document).on("click", ".rep_tweet_submit", function() {
 			let tweet = "";
 			for (let i in rep_selected) {
-				tweet += `${song[rep_selected[i]][song_idx.name]}${setting.rep_show_artist ? (" / " + song[rep_selected[i]][song_idx.artist]) : ""}\n`;
+				tweet += `${song[rep_selected[i]][song_idx.name]}${settings.rep_show_artist.value ? (" / " + song[rep_selected[i]][song_idx.artist]) : ""}\n`;
 			}
 			let e = this.id.replace("rep_tweet_", "");
 			switch (e) {
@@ -328,26 +328,26 @@ let rep_display_inter;
 
 function rep_display() {
 	$("#rep_count").html(`hit${rep_hits.length > 1 ? "s" : ""}: ${rep_hits.length}`);
-	if (setting.rep_selected_first) {
+	if (settings.rep_selected_first.value) {
 		// remove selected item in main array
 		rep_hits = rep_hits.filter(val => !rep_selected.includes(val));
 	}
+	if (!rep_hits.length) {
+		$("#rep_display").html(`<div class="search_no_result">検索結果なし</div>`);
+		return;
+	}
 	$("#rep_display").html("");
 	// sort record
-	switch (setting.rep_sort) {
+	switch (settings.rep_sort_method.value) {
 		case "50" : // default, do nothing
-			rep_hits.sort((a, b) => (setting.rep_sort_asd ? 1 : -1) * (a - b));
+			rep_hits.sort((a, b) => (settings.rep_sort_asd.value ? 1 : -1) * (a - b));
 			break;
 		case "count" :
 			// sang entry count
 			// create a lookup array for all songs for the current member selection
 			let entry_count = [];
-			for (let i = 1; i < song.length; ++i) {
-				entry_count[i] = entry_proc[i].length;
-			}
-			rep_hits.sort((a, b) => {
-				return (setting.rep_sort_asd ? 1 : -1) * (entry_count[b] - entry_count[a]);
-			});
+			rep_hits.forEach(x => entry_count[x] = entry_proc[x].length);
+			rep_hits.sort((a, b) => (settings.rep_sort_asd.value ? 1 : -1) * (entry_count[b] - entry_count[a]));
 			break;
 		case "date" : {
 			// sort with last sang date
@@ -356,24 +356,18 @@ function rep_display() {
 				let dummy = get_last_sang(i);
 				date_lookup[i] = dummy ? dummy.getTime() : 0;
 			}
-			rep_hits.sort((a, b) => {
-				return (setting.rep_sort_asd ? 1 : -1) * (date_lookup[b] - date_lookup[a]);
-			});
+			rep_hits.sort((a, b) => (settings.rep_sort_asd.value ? 1 : -1) * (date_lookup[b] - date_lookup[a]));
 			break;
 		}
 		case "release" : {
 			// release date of song
 			let date_lookup = [];
-			for (let i = 1; i < song.length; ++i) {
-				date_lookup[i] = to8601(song[i][song_idx.release]).getTime();
-			}
-			rep_hits.sort((a, b) => {
-				return (setting.rep_sort_asd ? 1 : -1) * (date_lookup[b] - date_lookup[a]);
-			});
+			rep_hits.forEach(val => rls_lookup[val] = to8601(song[val][song_idx.release]).getTime());
+			rep_hits.sort((a, b) => (settings.rep_sort_asd.value ? 1 : -1) * (rls_lookup[b] - rls_lookup[a]));
 			break;
 		}
 	}
-	if (setting.rep_selected_first) {
+	if (settings.rep_selected_first.value) {
 		// add selected back into main array
 		rep_hits = rep_selected.concat(rep_hits);
 	}
@@ -414,16 +408,16 @@ function rep_display_loop() {
 
 function update_rep_sort_display() {
 	let temp = "";
-	switch (setting.rep_sort) {
+	switch (settings.rep_sort_method.value) {
 		case "50" : 
-			temp = setting.rep_sort_asd ? "正順 (⇌逆順)" : "逆順 (⇌正順)";
+			temp = settings.rep_sort_asd.value ? "正順 (⇌逆順)" : "逆順 (⇌正順)";
 			break;
 		case "count" : 
-			temp = setting.rep_sort_asd ? "多い順 (⇌少ない順)" : "少ない順 (⇌多い順)";
+			temp = settings.rep_sort_asd.value ? "多い順 (⇌少ない順)" : "少ない順 (⇌多い順)";
 			break;
 		case "date" : 
 		case "release" : 
-			temp = setting.rep_sort_asd ? "新しい順 (⇌古い順)" : "古い順 (⇌新しい順)";
+			temp = settings.rep_sort_asd.value ? "新しい順 (⇌古い順)" : "古い順 (⇌新しい順)";
 			break;
 		default : 
 			// error

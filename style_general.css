@@ -582,6 +582,36 @@ body.post_switch {
 	filter: opacity(0.25);
 }
 
+#setting_extra_container>div:first-child,
+.settings_extra>div:first-child {
+	text-decoration: underline;
+	text-underline-offset: 0.6vw;
+}
+
+#settings_reset_confirm {
+	margin: 7vw auto 2vw;
+	padding: 2vw;
+}
+
+.settings_reset {
+	margin: 0 auto 5vw;
+}
+
+.settings_reset>span {
+	margin: 0 5vw;
+	border-radius: 2.4vw;
+	font-weight: 700;
+	padding: 1.2vw 2.4vw;
+}
+#settings_reset_nah {
+	border: green 0.6vw solid;
+}
+
+#settings_reset_yes,
+#settings_reset_button {
+	border: crimson 0.6vw solid;
+}
+
 
 
 #copy_popup {
